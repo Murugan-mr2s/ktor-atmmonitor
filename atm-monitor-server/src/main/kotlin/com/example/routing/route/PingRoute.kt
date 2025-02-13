@@ -14,8 +14,7 @@ import io.ktor.server.routing.*
 
 fun Route.atmPingRoute(service : PingService) {
 
-
-
+    
     authenticate("jwt-auth") {
 
         get("/{atmid}") {
