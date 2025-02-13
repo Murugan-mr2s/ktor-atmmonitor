@@ -1,0 +1,18 @@
+ktor:
+  application:
+    name: "atm-monitor-server"
+    modules: 
+      - "com.example.ApplicationKt.module"
+  deployment:
+    port: 8080
+
+  postgres:
+    user: 'postgres'
+    password: 'password'
+    driver: 'org.postgresql.Driver'
+    url: 'jdbc:postgresql://postgres:5432/monitordb'
+
+  jwt:
+    secret: 'secret123567890secret123567890secret123567890secret123567890secret123567890secret123567890'
+    issuer: 'http://localhost:8080'
+    audience: 'atm-monitor-users'

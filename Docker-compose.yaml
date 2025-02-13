@@ -1,0 +1,37 @@
+services:
+  postgres:
+    container_name: 'postgres'
+    image: 'postgres:alpine'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_DB=monitordb'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  atm-monitor-server:
+    container_name: 'atm-monitor-server'
+    build:
+      context: ./atm-monitor-server
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+
+      #atm-monitor-client:
+      #container_name: 'atm-monitor-client'
+      #build:
+      #context: ./atm-monitor-client
+      #dockerfile: Dockerfile
+      #ports:
+      #- '8081:8081'
+      #depends_on:
+      #- postgres
+      #- atm-monitor-server
+
+volumes:
+  postgres_data:
